@@ -1,0 +1,3 @@
+/* Page-specific affordances; kept separate so shared layout stays compact. */
+html{scroll-behavior:smooth}main{flex:1}.view{padding-bottom:2.5rem}.view:not([hidden]){animation:appear .18s ease-out}@keyframes appear{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}.empty{padding:1.5rem;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:10px}.page-heading .eyebrow{color:var(--green-600)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view:not([hidden]){animation:none}}
