@@ -1,1 +1,272 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=index.html#map-analysis"><title>NISIP | Map analysis</title><link rel="canonical" href="index.html#map-analysis"></head><body><p><a href="index.html#map-analysis">Continue to Map Analysis</a></p><script>location.replace('index.html#map-analysis')</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map Analysis | NISIP</title>
+  <meta name="description" content="Map of Kenya's irrigation schemes and projects with filters by type, status and county.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="NISIP home">
+        <span class="brand-text">
+          <strong>NISIP</strong>
+          <small>National Irrigation Sector Investment Plan</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="scheme.html">Scheme</a></li>
+          <li><a href="projects.html">Irrigation Projects</a></li>
+          <li><a href="map-analysis.html" aria-current="page">Map Analysis</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero hero--sm">
+    <div class="container">
+      <p class="eyebrow">Map analysis</p>
+      <h1>Map analysis</h1>
+      <p class="lead">See where irrigation schemes and projects are located, and filter them by type, status and county.</p>
+
+    </div>
+  </section>
+
+  <main id="main" class="container page">
+    <section class="panel" aria-labelledby="map-title">
+      <div class="panel-head">
+        <div>
+          <h2 id="map-title">Schemes and projects across Kenya</h2>
+          <p>Select a marker, or choose a place from the list.</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="chips" id="layer-chips" role="group" aria-label="Layers">
+          <button type="button" class="chip" data-layer="schemes" aria-pressed="true">Schemes</button>
+          <button type="button" class="chip" data-layer="projects" aria-pressed="true">Projects</button>
+        </div>
+        <div>
+          <label class="sr-only" for="status">Filter by status</label>
+          <select id="status">
+            <option value="">All statuses</option>
+            <option>Operational</option>
+            <option>Under construction</option>
+            <option>Rehabilitation</option>
+            <option>Planned</option>
+          </select>
+        </div>
+        <div class="search">
+          <label class="sr-only" for="q">Search places</label>
+          <input id="q" type="search" placeholder="Search name or county…" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="map-summary" role="status" aria-live="polite">
+        <span><strong id="m-count">0</strong>places shown</span>
+        <span><strong id="m-area">0</strong>hectares (potential / target)</span>
+      </div>
+
+      <div class="map-layout">
+        <div class="map-box">
+          <div id="map" role="application" aria-label="Interactive map of Kenya showing irrigation schemes and projects"></div>
+          <div class="legend">
+            <span><i class="l-scheme"></i>Irrigation scheme</span>
+            <span><i class="l-project"></i>Project</span>
+            <span>Scroll or pinch to zoom · use the layers button for terrain and satellite</span>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="detail" id="detail" aria-live="polite">
+            <p class="sub">Select a marker to see its details.</p>
+          </div>
+          <ul class="place-list" id="place-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+        </div>
+        <p class="tagline">Revolutionizing irrigation.</p>
+      </div>
+
+      <nav aria-label="Useful links">
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="reports.html">Production reports</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+        </ul>
+      </nav>
+
+      <address>
+        <h2>Contact Us</h2>
+        <p>State Department for Irrigation</p>
+        <p>Maji House, Upper Hill, Off Ngong Road, Nairobi</p>
+        <p>P.O. Box 49720 – 00100, Nairobi</p>
+      </address>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const KENYA_BOUNDS = [[-4.8, 33.8], [5.1, 42.0]];
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Map + base layers ---------- */
+    const map = L.map('map', {
+      minZoom: 5, maxZoom: 16, zoomSnap: 0.5,
+      maxBounds: [[-9, 29], [10, 47]], maxBoundsViscosity: 0.8
+    });
+    const baseLayers = {
+      'Street': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }),
+      'Terrain': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        maxZoom: 17, subdomains: 'abc',
+        attribution: 'Map data &copy; OpenStreetMap contributors, SRTM | Style &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+      }),
+      'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18, attribution: 'Tiles &copy; Esri — Maxar, Earthstar Geographics'
+      })
+    };
+    baseLayers.Street.addTo(map);
+    L.control.layers(baseLayers, null, { position: 'topright' }).addTo(map);
+    L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
+
+    const ResetControl = L.Control.extend({
+      options: { position: 'topleft' },
+      onAdd() {
+        const b = L.DomUtil.create('button', 'map-reset leaflet-bar');
+        b.type = 'button'; b.textContent = 'Reset view';
+        L.DomEvent.disableClickPropagation(b);
+        b.addEventListener('click', () => fit());
+        return b;
+      }
+    });
+    map.addControl(new ResetControl());
+
+    /* ---------- Data ---------- */
+    const ALL = [
+      ...SCHEMES.map(s => ({ ...s, kind: 'scheme', area: s.potentialHa })),
+      ...PROJECTS.map(p => ({ ...p, kind: 'project', area: p.areaHa }))
+    ];
+    const layers = { schemes: true, projects: true };
+    const group = L.layerGroup().addTo(map);
+    const markers = new Map();
+    let selectedId = null;
+
+    const iconFor = d => L.divIcon({
+      className: 'pin-wrap', html: `<span class="pin pin--${d.kind}"></span>`,
+      iconSize: [30, 30], iconAnchor: [15, 15]
+    });
+
+    function fit(list = visible()) {
+      const opts = { animate: !reduceMotion };
+      if (!list.length) return map.fitBounds(KENYA_BOUNDS, opts);
+      if (list.length === 1) return map.setView([list[0].lat, list[0].lng], 9, opts);
+      map.fitBounds(L.latLngBounds(list.map(d => [d.lat, d.lng])), { ...opts, padding: [40, 40], maxZoom: 9 });
+    }
+
+    /* ---------- Filters ---------- */
+    $('#layer-chips').addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', String(on));
+      layers[b.dataset.layer] = on;
+      render();
+    });
+    $('#status').addEventListener('change', render);
+    $('#q').addEventListener('input', render);
+
+    function visible() {
+      const st = $('#status').value, q = $('#q').value.trim().toLowerCase();
+      return ALL.filter(d =>
+        layers[d.kind + 's'] &&
+        (!st || d.status === st) &&
+        (!q || (d.name + ' ' + d.county).toLowerCase().includes(q))
+      );
+    }
+
+    /* ---------- Selection ---------- */
+    function select(id, pan = false) {
+      selectedId = id;
+      const d = ALL.find(x => x.id === id);
+      if (!d) {
+        $('#detail').innerHTML = '<p class="sub">Select a marker to see its details.</p>';
+      } else {
+        const facts = d.kind === 'scheme'
+          ? `<div><dt>Potential</dt><dd>${fmtInt(d.potentialHa)} ha</dd></div><div><dt>Developed</dt><dd>${fmtInt(d.developedHa)} ha</dd></div><div><dt>Farmers</dt><dd>${fmtInt(d.farmers)}</dd></div>`
+          : `<div><dt>Target</dt><dd>${fmtInt(d.areaHa)} ha</dd></div><div><dt>Budget</dt><dd>KES ${d.budgetBn}B</dd></div><div><dt>Progress</dt><dd>${d.progress}%</dd></div>`;
+        $('#detail').innerHTML = `
+          ${badge(d.status)}
+          <h3>${esc(d.name)}</h3>
+          <p class="sub">${esc(d.county)} County · ${d.kind === 'scheme' ? 'Irrigation scheme' : 'Project'}</p>
+          <p>${esc(d.description)}</p>
+          <dl class="facts">${facts}</dl>
+          <p><a class="osm-link" href="https://www.openstreetmap.org/?mlat=${d.lat}&mlon=${d.lng}#map=12/${d.lat}/${d.lng}" target="_blank" rel="noopener">Open in OpenStreetMap ↗</a></p>`;
+        if (pan) map.setView([d.lat, d.lng], Math.max(map.getZoom(), 8), { animate: !reduceMotion });
+      }
+      markers.forEach((m, mid) => {
+        const on = mid === id;
+        m.setZIndexOffset(on ? 1000 : 0);
+        const el = m.getElement(); if (el) el.classList.toggle('is-active', on);
+      });
+      $$('#place-list button').forEach(b => b.setAttribute('aria-current', String(b.dataset.id === id)));
+    }
+
+    /* ---------- Render ---------- */
+    function render() {
+      const list = visible();
+      if (selectedId && !list.some(d => d.id === selectedId)) selectedId = null;
+
+      group.clearLayers(); markers.clear();
+      list.forEach(d => {
+        const m = L.marker([d.lat, d.lng], { icon: iconFor(d), keyboard: true, riseOnHover: true });
+        m.bindTooltip(esc(d.name), { direction: 'top', offset: [0, -14] });
+        m.on('click', () => select(d.id));
+        m.addTo(group);
+        const el = m.getElement();
+        if (el) el.setAttribute('aria-label', `${d.name}, ${d.county} County`);
+        markers.set(d.id, m);
+      });
+
+      $('#place-list').innerHTML = list.length
+        ? list.map(d => `<li><button type="button" data-id="${d.id}"><span>${esc(d.name)}<small>${esc(d.county)} · ${d.kind === 'scheme' ? 'Scheme' : 'Project'}</small></span>${badge(d.status)}</button></li>`).join('')
+        : '<li><div class="empty" style="border:0">Nothing matches the current filters.</div></li>';
+
+      $('#m-count').textContent = list.length;
+      $('#m-area').textContent = fmtInt(list.reduce((s, d) => s + d.area, 0));
+      select(selectedId);
+      fit(list);
+    }
+
+    $('#place-list').addEventListener('click', e => { const b = e.target.closest('button'); if (b) select(b.dataset.id, true); });
+
+    render();
+  </script>
+</body>
+</html>

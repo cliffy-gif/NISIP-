@@ -1,20 +1,42 @@
-# NISIP Irrigation Investment Portal
+# NISIP-MIS demonstration
 
-A responsive, static demonstration application for exploring irrigation schemes, project progress, illustrative locations and a simple crop investment model.
+This folder contains a static front-end demonstration and corrected design documents for the National Irrigation Sector Investment Plan Management Information System (NISIP-MIS).
 
-## Run locally
+## Run locally on Windows
 
-Open `index.html` in a browser, or serve this directory with any static HTTP server. No framework, package installation or build step is required.
+Open PowerShell in this folder and run:
 
-## Pages and features
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\serve.ps1
+```
 
-- Hash-routed Home, Schemes, Projects, Map Analysis, Investment Calculator and Reports views.
-- Search and filter controls for schemes and projects, plus project sorting.
-- A clearly labeled schematic map and location list using illustrative sample locations.
-- Live calculator with acreage/hectare conversion, NPV, IRR where calculable, payback, chart and disclosed assumptions.
-- Responsive mobile navigation, keyboard-accessible controls and a report-request prototype.
-- Legacy HTML page URLs redirect to their corresponding app view.
+Then open <http://127.0.0.1:8000>. Press `Ctrl+C` to stop the server. No package installation or build step is required.
 
-## Important data notice
+## Render deployment (selected host for this project)
 
-All sample scheme/project data and crop economics in `data.js` are for demonstration only. They are not verified official NISIP figures, forecasts or investment advice. Validate and replace them with authorized data before any public deployment. The report form is front-end only and does not transmit or store submissions.
+`render.yaml` defines a Render Static Site that publishes the repository root directly, so it does not rely on a hand-maintained list of files to copy. Connect the GitHub repository in Render and create a Static Site (or use the Blueprint configuration). The folder itself has no Git remote or Render credentials, so it is configured for deployment but has not been published.
+
+Render is the selected ongoing host for this static project site. It can remain online and redeploy from GitHub when you push updates, subject to your Render account and service terms. This app still contains sample data and has no real authentication, backend or database, so do not use it to collect sensitive or official information.
+
+The supplied original BRS specified government infrastructure (including Konza) for production. Choosing Render changes that original hosting requirement. If your instructor or sponsoring institution requires Konza/government hosting, obtain approval or use that host instead.
+
+The Docker/nginx package and `docs/KONZA-DEPLOYMENT.md` remain as an alternative if Konza is later required.
+
+## Demonstration limitations
+
+- `data.js` and `calculator.js` contain illustrative records, prices, yields and costs—not official figures.
+- The map uses Leaflet and third-party map tiles; internet access is required.
+- Staff sign-in is intentionally disconnected and never accepts demo credentials or creates a session.
+- The report-request form shows a local preview only; it does not transmit or store a request.
+- There is no backend, persistent database, staff workspace, review queue, real notification, official data feed, audit log or service monitoring.
+- Do not enter real credentials, personal information or sensitive/official records.
+
+## Design and corrected source copies
+
+- [Integrated system design in the app](integrated-design.html)
+- [Process design](docs/PROCESS-DESIGN.md)
+- [System architecture](docs/SYSTEM-ARCHITECTURE.md)
+- [Business requirements](docs/BUSINESS-REQUIREMENTS.md)
+- [Integration design](docs/INTEGRATION-DESIGN.md)
+
+The corrected copies reconcile the original process diagram, layered architecture and BRS without treating proposed APIs, performance targets or illustrative sample values as deployed facts.

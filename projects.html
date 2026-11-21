@@ -1,1 +1,181 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=index.html#projects"><title>NISIP | Projects</title><link rel="canonical" href="index.html#projects"></head><body><p><a href="index.html#projects">Continue to Projects</a></p><script>location.replace('index.html#projects')</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Irrigation Projects | NISIP</title>
+  <meta name="description" content="Track national irrigation projects: budgets, progress and timelines.">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="NISIP home">
+        <span class="brand-text">
+          <strong>NISIP</strong>
+          <small>National Irrigation Sector Investment Plan</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="scheme.html">Scheme</a></li>
+          <li><a href="projects.html" aria-current="page">Irrigation Projects</a></li>
+          <li><a href="map-analysis.html">Map Analysis</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero hero--sm">
+    <div class="container">
+      <p class="eyebrow">Irrigation projects</p>
+      <h1>Irrigation projects</h1>
+      <p class="lead">Track dams, canals and rehabilitation works that are expanding irrigated land across the country.</p>
+
+    </div>
+  </section>
+
+  <main id="main" class="container page">
+    <section class="panel" aria-labelledby="proj-title">
+      <div class="panel-head">
+        <div>
+          <h2 id="proj-title">Project pipeline</h2>
+          <p>Budget, progress and timelines for national irrigation projects.</p>
+        </div>
+      </div>
+      <div class="stats" style="margin-bottom:1.5rem">
+        <div class="stat"><strong id="p-count">–</strong><span>Projects</span></div>
+        <div class="stat"><strong id="p-budget">–</strong><span>Total budget</span></div>
+        <div class="stat"><strong id="p-area">–</strong><span>Target hectares</span></div>
+        <div class="stat"><strong id="p-progress">–</strong><span>Average progress</span></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <label class="sr-only" for="q">Search projects</label>
+          <input id="q" type="search" placeholder="Search by name, county or category…" autocomplete="off">
+        </div>
+        <div class="chips" id="status-chips" role="group" aria-label="Filter by status"></div>
+        <div>
+          <label class="sr-only" for="sort">Sort projects</label>
+          <select id="sort">
+            <option value="progress">Sort: progress</option>
+            <option value="budget">Sort: budget</option>
+            <option value="area">Sort: target area</option>
+            <option value="name">Sort: name</option>
+          </select>
+        </div>
+      </div>
+      <p class="result-count" id="count" role="status" aria-live="polite"></p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Project</th>
+              <th scope="col">Status</th>
+              <th scope="col">Progress</th>
+              <th scope="col" class="num">Budget</th>
+              <th scope="col" class="num">Target area</th>
+              <th scope="col">Timeline</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+        </div>
+        <p class="tagline">Revolutionizing irrigation.</p>
+      </div>
+
+      <nav aria-label="Useful links">
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="reports.html">Production reports</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+        </ul>
+      </nav>
+
+      <address>
+        <h2>Contact Us</h2>
+        <p>State Department for Irrigation</p>
+        <p>Maji House, Upper Hill, Off Ngong Road, Nairobi</p>
+        <p>P.O. Box 49720 – 00100, Nairobi</p>
+      </address>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const STATUSES = ['All', ...['Operational', 'Under construction', 'Rehabilitation', 'Planned'].filter(s => PROJECTS.some(p => p.status === s))];
+    let activeStatus = 'All';
+
+    const chips = $('#status-chips');
+    chips.innerHTML = STATUSES.map(s => `<button type="button" class="chip" data-status="${s}" aria-pressed="${s === 'All'}">${s}</button>`).join('');
+    chips.addEventListener('click', e => {
+      const b = e.target.closest('.chip'); if (!b) return;
+      activeStatus = b.dataset.status;
+      $$('.chip', chips).forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+      render();
+    });
+    $('#q').addEventListener('input', render);
+    $('#sort').addEventListener('change', render);
+
+    const SORTERS = {
+      progress: (a, b) => b.progress - a.progress,
+      budget: (a, b) => b.budgetBn - a.budgetBn,
+      area: (a, b) => b.areaHa - a.areaHa,
+      name: (a, b) => a.name.localeCompare(b.name)
+    };
+
+    function render() {
+      const q = $('#q').value.trim().toLowerCase();
+      const list = PROJECTS.filter(p =>
+        (activeStatus === 'All' || p.status === activeStatus) &&
+        (!q || [p.name, p.county, p.category].join(' ').toLowerCase().includes(q))
+      ).sort(SORTERS[$('#sort').value]);
+
+      $('#count').textContent = `${list.length} project${list.length === 1 ? '' : 's'} shown`;
+      const totalBudget = list.reduce((s, p) => s + p.budgetBn, 0);
+      const totalArea = list.reduce((s, p) => s + p.areaHa, 0);
+      const avg = list.length ? list.reduce((s, p) => s + p.progress, 0) / list.length : 0;
+      $('#p-count').textContent = list.length;
+      $('#p-budget').textContent = `KES ${totalBudget.toFixed(1)}B`;
+      $('#p-area').textContent = fmtInt(totalArea);
+      $('#p-progress').textContent = `${Math.round(avg)}%`;
+
+      $('#rows').innerHTML = list.length ? list.map(p => `
+        <tr>
+          <td><strong>${esc(p.name)}</strong><small>${esc(p.county)} County · ${esc(p.category)}</small></td>
+          <td>${badge(p.status)}</td>
+          <td><div class="progress" role="img" aria-label="${p.progress}% complete"><div class="bar"><i style="width:${p.progress}%"></i></div><span>${p.progress}%</span></div></td>
+          <td class="num">KES ${p.budgetBn.toFixed(1)}B</td>
+          <td class="num">${fmtInt(p.areaHa)} ha</td>
+          <td>${p.start} – ${p.end}</td>
+        </tr>`).join('') : '<tr><td colspan="6"><div class="empty">No projects match your search.</div></td></tr>';
+    }
+    render();
+  </script>
+</body>
+</html>

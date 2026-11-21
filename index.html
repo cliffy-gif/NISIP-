@@ -1,11 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore Kenya's irrigation schemes, projects and investment tools. NISIP demonstration application.">
-  <meta name="theme-color" content="#0b3d2e">
-  <title>NISIP | Irrigation Investment Portal</title>
+  <title>NISIP-MIS | Irrigation sector information</title>
+  <meta name="description" content="Explore the NISIP-MIS demonstration: irrigation schemes, projects, map analysis, investment scenarios and system design.">
   <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="pages.css">
 </head>
@@ -13,74 +12,86 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="NISIP home">
-        <span class="brand-mark" aria-hidden="true">N</span>
-        <span class="brand-text"><strong>NISIP</strong><small>National Irrigation Sector Investment Plan</small></span>
+      <a class="brand" href="index.html" aria-label="NISIP-MIS home">
+        <span class="brand-text"><strong>NISIP-MIS</strong><small>National Irrigation Sector Investment Plan</small></span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
-      <nav id="primary-nav" class="nav" aria-label="Primary navigation">
-        <a href="#home" data-view-link="home">Home</a>
-        <a href="#schemes" data-view-link="schemes">Schemes</a>
-        <a href="#projects" data-view-link="projects">Projects</a>
-        <a href="#map-analysis" data-view-link="map-analysis">Map analysis</a>
-        <a href="#calculator" data-view-link="calculator">Investment calculator</a>
-        <a href="#reports" data-view-link="reports">Reports</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="map-analysis.html">Map analysis</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment calculator</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html">Staff sign in</a>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="container">
-    <section class="view" id="view-home" data-view="home" aria-labelledby="home-title">
-      <div class="hero">
-        <p class="eyebrow">State Department for Irrigation · Kenya</p>
-        <h1 id="home-title">Investing in a water-secure future</h1>
-        <p class="lead">Explore irrigation schemes, follow project progress and estimate the potential of your next agricultural investment.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="#projects">Explore projects</a><a class="btn btn-outline" href="#calculator">Open investment calculator</a></div>
+  <section class="hero hero--lg">
+    <div class="container">
+      <p class="eyebrow">A planning and information concept</p>
+      <h1>Better information for irrigation planning</h1>
+      <p class="lead">Explore scheme and project information, compare indicative investment scenarios and see how a connected NISIP-MIS could support evidence-based decisions.</p>
+      <div class="hero-actions">
+        <a class="hero-cta hero-cta--solid" href="projects.html">Explore projects</a>
+        <a class="hero-cta" href="integrated-design.html">View integrated design</a>
       </div>
-      <div class="notice" role="note"><strong>Demonstration:</strong> Figures and assumptions throughout this prototype are sample data and are not official forecasts. Verify all values before making decisions.</div>
-      <section class="panel" aria-labelledby="figures-title"><div class="panel-head"><div><h2 id="figures-title">Irrigation at a glance</h2><p>Illustrative platform figures</p></div></div><div class="stats">
-        <article class="stat"><strong id="stat-schemes">—</strong><span>Schemes represented</span></article><article class="stat"><strong id="stat-area">—</strong><span>Potential hectares</span></article><article class="stat"><strong id="stat-farmers">—</strong><span>Farmers represented</span></article><article class="stat"><strong id="stat-projects">—</strong><span>Projects tracked</span></article>
-      </div></section>
-      <section class="section"><h2>Explore the platform</h2><div class="feature-grid">
-        <a class="feature" href="#schemes"><span class="feature-icon" aria-hidden="true">◉</span><h3>Irrigation schemes</h3><p>Search schemes by county, type, status and crops.</p><span class="more">Browse schemes →</span></a>
-        <a class="feature" href="#projects"><span class="feature-icon" aria-hidden="true">▤</span><h3>Projects</h3><p>Review project status, progress, budgets and target areas.</p><span class="more">Track projects →</span></a>
-        <a class="feature" href="#map-analysis"><span class="feature-icon" aria-hidden="true">⌖</span><h3>Map analysis</h3><p>Explore the locations represented in this sample dataset.</p><span class="more">View locations →</span></a>
-        <a class="feature" href="#calculator"><span class="feature-icon" aria-hidden="true">▦</span><h3>Investment calculator</h3><p>Compare illustrative cash flows for crop and system choices.</p><span class="more">Run an estimate →</span></a>
-      </div></section>
+    </div>
+  </section>
+
+  <main id="main" class="container page">
+    <div class="alert alert--info demo-notice" role="note">
+      <strong>Demonstration only.</strong> Scheme/project records and calculator assumptions are illustrative, not official data. Staff authentication and report delivery are not connected; do not enter sensitive information.
+    </div>
+    <section class="panel" aria-label="Illustrative data summary">
+      <div class="stats">
+        <div class="stat"><strong id="st-schemes">–</strong><span>Sample schemes</span></div>
+        <div class="stat"><strong id="st-area">–</strong><span>Potential hectares (sample)</span></div>
+        <div class="stat"><strong id="st-farmers">–</strong><span>Farmers (sample)</span></div>
+        <div class="stat"><strong id="st-projects">–</strong><span>Sample projects</span></div>
+      </div>
     </section>
 
-    <section class="view" id="view-schemes" data-view="schemes" aria-labelledby="schemes-title" hidden>
-      <div class="page-heading"><p class="eyebrow">Explore</p><h1 id="schemes-title">Irrigation schemes</h1><p>Find scheme details and narrow the results with the filters.</p></div>
-      <section class="panel"><div class="toolbar"><label class="search-label" for="scheme-search">Search schemes<input id="scheme-search" type="search" placeholder="Name, county or crop…"></label><label for="scheme-status">Status<select id="scheme-status"><option value="">All statuses</option></select></label><label for="scheme-type">Type<select id="scheme-type"><option value="">All types</option></select></label></div><p id="scheme-count" class="result-count" aria-live="polite"></p><div id="scheme-list" class="card-grid"></div></section>
+    <section class="section" aria-labelledby="explore">
+      <h2 id="explore">Explore the demonstration</h2>
+      <p class="section-sub">These modules illustrate the proposed public-facing information services.</p>
+      <div class="grid">
+        <a class="feature" href="scheme.html"><span class="icon" aria-hidden="true">01</span><h3>Scheme catalogue</h3><p>Search sample irrigation schemes by location, status and scheme type.</p><span class="more">Browse schemes →</span></a>
+        <a class="feature" href="projects.html"><span class="icon" aria-hidden="true">02</span><h3>Project pipeline</h3><p>Review sample project status, progress, target area and indicative budgets.</p><span class="more">View projects →</span></a>
+        <a class="feature" href="map-analysis.html"><span class="icon" aria-hidden="true">03</span><h3>Map analysis</h3><p>Explore sample scheme and project locations on an interactive map.</p><span class="more">Open map →</span></a>
+        <a class="feature" href="investment-calculator.html"><span class="icon" aria-hidden="true">04</span><h3>Scenario calculator</h3><p>Compare illustrative irrigation cost and return assumptions; outputs are not investment advice.</p><span class="more">Run a scenario →</span></a>
+        <a class="feature" href="reports.html"><span class="icon" aria-hidden="true">05</span><h3>Report request flow</h3><p>Preview the intended request workflow. Submissions are not transmitted or stored.</p><span class="more">See the form →</span></a>
+        <a class="feature" href="integrated-design.html"><span class="icon" aria-hidden="true">06</span><h3>Integrated system design</h3><p>See how people, processes, applications, data and hosting connect to support irrigation decisions.</p><span class="more">View system design →</span></a>
+      </div>
     </section>
-
-    <section class="view" id="view-projects" data-view="projects" aria-labelledby="projects-title" hidden>
-      <div class="page-heading"><p class="eyebrow">Delivery</p><h1 id="projects-title">Irrigation projects</h1><p>Track illustrative project timelines, progress and target areas.</p></div>
-      <section class="panel"><div class="toolbar"><label class="search-label" for="project-search">Search projects<input id="project-search" type="search" placeholder="Name, county or category��"></label><label for="project-status">Status<select id="project-status"><option value="">All statuses</option></select></label><label for="project-sort">Sort by<select id="project-sort"><option value="progress">Progress</option><option value="budget">Budget</option><option value="area">Target area</option><option value="name">Name</option></select></label></div><p id="project-count" class="result-count" aria-live="polite"></p><div class="table-wrap"><table><thead><tr><th>Project</th><th>Status</th><th>Progress</th><th class="num">Budget</th><th class="num">Target area</th><th>Timeline</th></tr></thead><tbody id="project-rows"></tbody></table></div></section>
-    </section>
-
-    <section class="view" id="view-map-analysis" data-view="map-analysis" aria-labelledby="map-title" hidden>
-      <div class="page-heading"><p class="eyebrow">Locations</p><h1 id="map-title">Map analysis</h1><p>Browse sample scheme and project locations by county. Locations are illustrative, not survey-grade.</p></div>
-      <section class="panel"><div class="toolbar"><label class="search-label" for="map-search">Search locations<input id="map-search" type="search" placeholder="Name or county…"></label><label for="map-kind">Show<select id="map-kind"><option value="all">Schemes and projects</option><option value="scheme">Schemes only</option><option value="project">Projects only</option></select></label></div><div class="map-layout"><div class="map-box"><svg viewBox="0 0 640 620" role="img" aria-labelledby="kenya-map-title kenya-map-desc"><title id="kenya-map-title">Schematic view of Kenya</title><desc id="kenya-map-desc">Not to scale. Sample locations are listed beside the map.</desc><rect width="640" height="620" rx="16" fill="#eaf4f8"/><path class="kenya-shape" d="M190 70 282 48 350 82 425 105 503 154 477 221 508 272 465 327 446 403 400 472 352 510 309 475 257 460 219 414 186 362 157 307 151 244 167 181Z"/><g id="map-points"></g></svg><p class="map-caption">Schematic only · points are illustrative</p></div><div><p id="map-count" class="result-count" aria-live="polite"></p><ul id="map-list" class="place-list"></ul></div></div></section>
-    </section>
-
-    <section class="view" id="view-calculator" data-view="calculator" aria-labelledby="calculator-title" hidden>
-      <div class="page-heading"><p class="eyebrow">Plan a scenario</p><h1 id="calculator-title">Investment calculator</h1><p>Explore an illustrative estimate. Actual farm economics depend on location, season, water access and many other factors.</p></div>
-      <div class="calc-layout"><section class="panel"><h2>Your assumptions</h2><p class="panel-sub">Change an input to update the estimate.</p><form id="calc-form" class="calc-form">
-        <label>Land area<input id="calc-area" type="number" min="0.1" max="100000" step="0.1" value="10" required></label><label>Unit<select id="calc-unit"><option value="acres">Acres</option><option value="ha">Hectares</option></select></label>
-        <label>Crop<select id="calc-crop"></select></label><label>Irrigation system<select id="calc-system"></select></label><label>Water source<select id="calc-source"></select></label>
-        <label>Seasons per year<select id="calc-seasons"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></label>
-        <label>Investment period <output id="years-out">15 years</output><input id="calc-years" type="range" min="5" max="25" value="15"></label><label>Discount rate <output id="rate-out">12%</output><input id="calc-rate" type="range" min="1" max="30" value="12"></label>
-        <label>Crop price adjustment <output id="price-out">0%</output><input id="calc-price" type="range" min="-30" max="30" step="5" value="0"></label>
-      </form></section><section class="panel results-panel"><h2>Estimated results</h2><p id="calc-summary" class="panel-sub"></p><div class="notice" role="note">Illustrative only—not financial, agronomic or investment advice.</div><div class="kpis"><article class="kpi"><span>Initial investment</span><strong id="result-capex">—</strong></article><article class="kpi"><span>Annual net income</span><strong id="result-net">—</strong><small>At full production</small></article><article class="kpi"><span>Payback period</span><strong id="result-payback">—</strong></article><article class="kpi"><span>Net present value</span><strong id="result-npv">—</strong></article><article class="kpi"><span>Internal rate of return</span><strong id="result-irr">—</strong></article><article class="kpi"><span>Total net cash flow</span><strong id="result-total">—</strong></article></div><p id="calc-verdict" class="verdict" role="status" aria-live="polite"></p><div class="chart-wrap"><h3>Cumulative cash flow</h3><svg id="cash-chart" viewBox="0 0 640 260" role="img" aria-label="Cumulative cash flow chart"></svg></div><details><summary>Model assumptions</summary><ul id="assumptions-list"></ul></details></section></div>
-    </section>
-
-    <section class="view" id="view-reports" data-view="reports" aria-labelledby="reports-title" hidden>
-      <div class="page-heading"><p class="eyebrow">Get in touch</p><h1 id="reports-title">Request a report</h1><p>Use this form to describe the irrigation information you are looking for.</p></div>
-      <section class="panel form-panel"><div id="report-form-wrap"><p class="notice" role="note">Prototype form: submissions are not sent or stored. Do not enter sensitive personal information.</p><form id="report-form" class="report-form"><label>Full name<input name="name" autocomplete="name" maxlength="100" required></label><label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label><label>Organization type<select name="organization" required><option value="">Choose one</option><option>Individual</option><option>Government</option><option>Private sector</option><option>NGO / development partner</option><option>Academic / research</option></select></label><label>Report topic<select name="topic" required><option value="">Choose one</option><option>Scheme data</option><option>Project progress</option><option>Production and crops</option><option>Investment analysis</option><option>Other</option></select></label><label class="full-field">How will you use the report?<textarea name="reason" rows="5" maxlength="1000" required></textarea><small><span id="reason-count">0</span>/1000</small></label><button class="btn btn-primary full-field" type="submit">Submit request</button></form></div><div id="report-confirmation" class="confirmation" role="status" tabindex="-1" hidden><span class="success-mark" aria-hidden="true">✓</span><h2>Request recorded for this session</h2><p>This demonstration does not transmit or store requests. Thank you for trying it.</p><button id="new-report" class="btn btn-secondary" type="button">Submit another</button></div></section>
+    <section class="section">
+      <div class="cta-band">
+        <div><h2>One information flow, clearer decisions</h2><p>Field updates are validated, stored and turned into reports and dashboards for authorized decision-makers.</p></div>
+        <a class="btn" href="integrated-design.html">How integration works</a>
+      </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><a class="brand brand-footer" href="#home"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-text"><strong>NISIP</strong><small>National Irrigation Sector Investment Plan</small></span></a><p>Demonstration portal · Replace sample data with verified official sources before publication.</p><a href="#reports">Contact / report request</a></div></footer>
-  <script src="data.js" defer></script><script src="calculator.js" defer></script><script src="script.js" defer></script>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="footer-brand"><strong>NISIP-MIS</strong></div><p class="tagline">Integrated irrigation information for planning and accountability.</p></div>
+      <nav aria-label="Useful links"><h2>Explore</h2><ul><li><a href="projects.html">Projects</a></li><li><a href="reports.html">Report requests</a></li><li><a href="integrated-design.html">System design</a></li></ul></nav>
+      <div><h2>Hosting note</h2><p>Render is the selected ongoing host for this static project site. It uses sample data only and has no real login or database. The original requirements named government hosting; confirm with your instructor if that remains mandatory.</p></div>
+    </div>
+  </footer>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const total = (records, field) => records.reduce((sum, record) => sum + record[field], 0);
+    $('#st-schemes').textContent = SCHEMES.length;
+    $('#st-area').textContent = fmtInt(total(SCHEMES, 'potentialHa'));
+    $('#st-farmers').textContent = fmtInt(total(SCHEMES, 'farmers'));
+    $('#st-projects').textContent = PROJECTS.length;
+  </script>
 </body>
 </html>

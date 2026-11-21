@@ -1,1 +1,219 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=index.html#reports"><title>NISIP | Reports</title><link rel="canonical" href="index.html#reports"></head><body><p><a href="index.html#reports">Continue to Reports</a></p><script>location.replace('index.html#reports')</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a Report | NISIP</title>
+  <meta name="description" content="Request a report from the National Irrigation Sector Investment Plan (NISIP).">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="NISIP home">
+        <span class="brand-text">
+          <strong>NISIP</strong>
+          <small>National Irrigation Sector Investment Plan</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="scheme.html">Scheme</a></li>
+          <li><a href="projects.html">Irrigation Projects</a></li>
+          <li><a href="map-analysis.html">Map Analysis</a></li>
+          <li><a href="reports.html" aria-current="page">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Reports</p>
+      <h1>Request a report</h1>
+      <p class="lead">Access irrigation data, production figures and investment insights from the State Department for Irrigation.</p>
+      <a class="hero-cta" href="#form-title">Start a request</a>
+    </div>
+  </section>
+
+  <main id="main" class="container layout">
+    <aside class="info" aria-label="About report requests">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><span>1</span><div><strong>Tell us who you are</strong><p>Share your contact details and organisation type.</p></div></li>
+        <li><span>2</span><div><strong>Explain your need</strong><p>Describe the report and how you'll use it.</p></div></li>
+        <li><span>3</span><div><strong>We get back to you</strong><p>Our team reviews your request and responds by email or phone.</p></div></li>
+      </ol>
+      <div class="note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <p>Use an email and phone number you actively check so we can reach you.</p>
+      </div>
+    </aside>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Report Request Form</h2>
+      <p class="card-sub">Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
+
+      <form class="form">
+        <div class="field full">
+          <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Omondi Timothy" required>
+        </div>
+
+        <div class="field">
+          <label for="type">Type <span class="req" aria-hidden="true">*</span></label>
+          <select id="type" name="type" required>
+            <option value="" selected disabled>Select type</option>
+            <option>Individual</option>
+            <option>Government Institution</option>
+            <option>Private Sector</option>
+            <option>NGO / Development Partner</option>
+            <option>Academic / Research</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="designation">Designation <span class="req" aria-hidden="true">*</span></label>
+          <input id="designation" name="designation" type="text" autocomplete="organization-title" placeholder="e.g. Project Officer" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Active phone number <span class="req" aria-hidden="true">*</span></label>
+          <div class="phone">
+            <span class="phone-prefix" aria-hidden="true">🇰🇪 +254</span>
+            <input id="phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel"
+                   pattern="0?[17][0-9]{2}\s?[0-9]{3}\s?[0-9]{3}" title="Kenyan mobile number, e.g. 712 345 678" placeholder="712 345 678" required>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="reason">Reason <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="reason" name="reason" rows="5" maxlength="1000" placeholder="Which report do you need, and what will you use it for?" required></textarea>
+          <small class="counter" aria-live="polite"><span id="count">0</span>/1000</small>
+        </div>
+
+        <div class="actions full">
+          <button type="submit" class="btn btn-primary">
+            Submit request
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="confirmation" class="confirmation" role="status" aria-live="polite" hidden>
+        <div class="check" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>
+        </div>
+        <h3 id="confirmation-title" tabindex="-1">Request preview ready</h3>
+        <p id="confirmation-message">Thank you, <strong id="confirm-name"></strong>. This request has not been sent to the department.</p>
+        <button type="button" id="new-request" class="btn btn-light">Submit another request</button>
+      </div>
+      <p id="submit-error" class="form-error" role="alert" hidden></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+        </div>
+        <p class="tagline">Revolutionizing irrigation.</p>
+      </div>
+
+      <nav aria-label="Useful links">
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="reports.html">Production reports</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+        </ul>
+      </nav>
+
+      <address>
+        <h2>Contact Us</h2>
+        <p>State Department for Irrigation</p>
+        <p>Maji House, Upper Hill, Off Ngong Road, Nairobi</p>
+        <p>P.O. Box 49720 – 00100, Nairobi</p>
+      </address>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const reason = document.getElementById('reason');
+    const count = document.getElementById('count');
+    reason.addEventListener('input', () => { count.textContent = reason.value.length; });
+
+    // ----- Form submission + confirmation -----
+    // Set this to the department's real same-origin report endpoint when available.
+    const REPORT_ENDPOINT = null;
+
+    const form = document.querySelector('.form');
+    const confirmation = document.getElementById('confirmation');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitError = document.getElementById('submit-error');
+
+    function showConfirmation(data) {
+      document.getElementById('confirm-name').textContent = data.get('name');
+      document.getElementById('confirmation-title').textContent = REPORT_ENDPOINT ? 'Request submitted' : 'Request preview ready';
+      document.getElementById('confirmation-message').textContent = REPORT_ENDPOINT
+        ? `Thank you, ${data.get('name')}. We received your report request and will contact you at ${data.get('email')} or on your phone number shortly.`
+        : 'Demo mode: this request has not been sent to the department. Connect a report endpoint before accepting real requests.';
+      form.hidden = true;
+      document.querySelector('.card-sub').hidden = true;
+      submitError.hidden = true;
+      confirmation.hidden = false;
+      document.getElementById('confirmation-title').focus();
+    }
+
+    // Browser validation runs first, so this only fires when every field is filled correctly.
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      submitError.hidden = true;
+
+      try {
+        if (REPORT_ENDPOINT) {
+          const res = await fetch(REPORT_ENDPOINT, { method: 'POST', body: data, credentials: 'same-origin' });
+          if (!res.ok) throw new Error(`Request failed (${res.status})`);
+        }
+        showConfirmation(data);
+      } catch (err) {
+        submitError.textContent = 'Sorry, we could not submit your request. Check your connection and try again.';
+        submitError.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit request';
+      }
+    });
+
+    document.getElementById('new-request').addEventListener('click', () => {
+      form.reset();
+      count.textContent = '0';
+      submitError.hidden = true;
+      confirmation.hidden = true;
+      form.hidden = false;
+      document.querySelector('.card-sub').hidden = false;
+      document.getElementById('name').focus();
+    });
+  </script>
+</body>
+</html>

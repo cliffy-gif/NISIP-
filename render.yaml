@@ -2,8 +2,8 @@ services:
   - type: web
     name: nisip-mis-demo
     runtime: static
-    buildCommand: mkdir -p public/docs && cp index.html scheme.html projects.html reports.html map-analysis.html investment-calculator.html integrated-design.html signin.html home.css pages.css signin.css data.js calculator.js script.js public/ && cp docs/PROCESS-DESIGN.md docs/SYSTEM-ARCHITECTURE.md docs/BUSINESS-REQUIREMENTS.md docs/INTEGRATION-DESIGN.md public/docs/
-    staticPublishPath: public
+    buildCommand: echo "Static HTML site; no build required"
+    staticPublishPath: .
     headers:
       - path: /*
         name: X-Content-Type-Options

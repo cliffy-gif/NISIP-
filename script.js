@@ -1,45 +1,57 @@
-/* UI behavior, filtering, routing and accessible form handling. */
-'use strict';
 (() => {
-  const $ = (selector, root=document) => root.querySelector(selector);
-  const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const int = n => Math.round(Number(n)||0).toLocaleString('en-KE');
-  const kes = n => { const sign=n<0?'-':''; n=Math.abs(n); return sign+'KES '+(n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(0)+'K':Math.round(n).toLocaleString('en-KE')); };
-  const statusClass = s => ({'Operational':'operational','Under construction':'construction','Planned':'planned','Rehabilitation':'rehabilitation'}[s]||'');
-  const badge = s => `<span class="badge badge--${statusClass(s)}">${esc(s)}</span>`;
-  const toggle=$('.menu-toggle'), nav=$('#primary-nav');
-  toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');});
-  function showView() {
-    const requested=location.hash.slice(1)||'home';
-    const view=['home','schemes','projects','map-analysis','calculator','reports'].includes(requested)?requested:'home';
-    $$('[data-view]').forEach(section=>{section.hidden=section.dataset.view!==view;});
-    $$('[data-view-link]').forEach(link=>{if(link.dataset.viewLink===view)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
-    nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');
-    document.title=`${view==='home'?'Home':view==='map-analysis'?'Map analysis':view[0].toUpperCase()+view.slice(1)} | NISIP`;
-    if(view==='home') $('#main').focus({preventScroll:true});
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+  window.$ = $;
+  window.$$ = $$;
+  window.esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+  window.fmtInt = value => new Intl.NumberFormat('en-KE', { maximumFractionDigits: 0 }).format(value);
+  window.fmtKES = value => new Intl.NumberFormat('en-KE', {
+    style: 'currency',
+    currency: 'KES',
+    maximumFractionDigits: 0
+  }).format(value);
+  window.badge = status => {
+    const classes = {
+      Operational: 'operational',
+      'Under construction': 'construction',
+      Planned: 'planned',
+      Rehabilitation: 'rehab'
+    };
+    const kind = classes[status] || 'planned';
+    return `<span class="badge badge--${kind}">${window.esc(status)}</span>`;
+  };
+
+  const toggle = $('.menu-toggle');
+  const nav = $('#nav-links');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('open', open);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('open');
+      }
+    });
   }
-  $('#main').setAttribute('tabindex','-1');window.addEventListener('hashchange',showView);showView();
-  // Home statistics
-  $('#stat-schemes').textContent=SCHEMES.length;$('#stat-area').textContent=int(SCHEMES.reduce((sum,x)=>sum+x.potentialHa,0));$('#stat-farmers').textContent=int(SCHEMES.reduce((sum,x)=>sum+x.farmers,0));$('#stat-projects').textContent=PROJECTS.length;
-  // Scheme search and facets
-  const unique=(items,key)=>[...new Set(items.map(item=>item[key]))].sort();
-  function options(id,values){const select=$(id);values.forEach(value=>select.insertAdjacentHTML('beforeend',`<option value="${esc(value)}">${esc(value)}</option>`));}
-  options('#scheme-status',unique(SCHEMES,'status'));options('#scheme-type',unique(SCHEMES,'type'));options('#project-status',unique(PROJECTS,'status'));
-  function renderSchemes(){const q=$('#scheme-search').value.trim().toLowerCase(),st=$('#scheme-status').value,type=$('#scheme-type').value;const list=SCHEMES.filter(s=>(!st||s.status===st)&&(!type||s.type===type)&&(!q||[s.name,s.county,...s.crops].join(' ').toLowerCase().includes(q)));$('#scheme-count').textContent=`${list.length} scheme${list.length===1?'':'s'} found`;$('#scheme-list').innerHTML=list.length?list.map(s=>`<article class="card-item"><h3>${esc(s.name)}</h3><p>${esc(s.county)} County · ${esc(s.type)}</p>${badge(s.status)}<p>${esc(s.description)}</p><p><strong>Crops:</strong> ${s.crops.map(esc).join(', ')}</p><dl><div><dt>Potential</dt><dd>${int(s.potentialHa)} ha</dd></div><div><dt>Developed</dt><dd>${int(s.developedHa)} ha</dd></div><div><dt>Farmers</dt><dd>${int(s.farmers)}</dd></div></dl></article>`).join(''):'<p class="empty">No schemes match these filters.</p>';}
-  ['#scheme-search','#scheme-status','#scheme-type'].forEach(sel=>$(sel).addEventListener('input',renderSchemes));renderSchemes();
-  // Project search, status and sorting
-  function renderProjects(){const q=$('#project-search').value.trim().toLowerCase(),st=$('#project-status').value;const sort=$('#project-sort').value;const list=PROJECTS.filter(p=>(!st||p.status===st)&&(!q||[p.name,p.county,p.category].join(' ').toLowerCase().includes(q))).sort(({name:a,progress:ap,budgetBn:ab,areaHa:aa},{name:b,progress:bp,budgetBn:bb,areaHa:ba})=>sort==='name'?a.localeCompare(b):sort==='budget'?bb-ab:sort==='area'?ba-aa:bp-ap);$('#project-count').textContent=`${list.length} project${list.length===1?'':'s'} shown`;$('#project-rows').innerHTML=list.length?list.map(p=>`<tr><td><strong>${esc(p.name)}</strong><small>${esc(p.county)} County · ${esc(p.category)}</small></td><td>${badge(p.status)}</td><td><div class="progress" role="img" aria-label="${p.progress}% complete"><span class="bar"><i style="width:${p.progress}%"></i></span>${p.progress}%</div></td><td class="num">${kes(p.budgetBn*1e9)}</td><td class="num">${int(p.areaHa)} ha</td><td>${p.start}–${p.end}</td></tr>`).join(''):'<tr><td colspan="6"><p class="empty">No projects match these filters.</p></td></tr>';}
-  ['#project-search','#project-status','#project-sort'].forEach(sel=>$(sel).addEventListener('input',renderProjects));renderProjects();
-  // Schematic map and matching list. All coordinate placements are intentionally illustrative.
-  const locs=[...SCHEMES.map(x=>({...x,kind:'scheme'})),...PROJECTS.map(x=>({...x,kind:'project'}))];
-  function renderMap(){const q=$('#map-search').value.trim().toLowerCase(),kind=$('#map-kind').value;const list=locs.filter(x=>(kind==='all'||x.kind===kind)&&(!q||`${x.name} ${x.county}`.toLowerCase().includes(q)));$('#map-count').textContent=`${list.length} location${list.length===1?'':'s'} shown`;$('#map-list').innerHTML=list.length?list.map(x=>`<li><strong>${esc(x.name)}</strong><small>${esc(x.county)} County · ${x.kind==='scheme'?'Scheme':'Project'} · ${esc(x.status)}</small></li>`).join(''):'<li class="empty">No matching locations.</li>';const points=list.map((x,i)=>{const xx=190+(i*67%280),yy=100+(i*83%350);return `<circle class="map-point ${x.kind==='project'?'project':''}" cx="${xx}" cy="${yy}" r="8"><title>${esc(x.name)} — ${esc(x.county)}</title></circle>`;}).join('');$('#map-points').innerHTML=points;}
-  ['#map-search','#map-kind'].forEach(sel=>$(sel).addEventListener('input',renderMap));renderMap();
-  // Calculator initialization and accessible outputs.
-  const fill=(selector,obj)=>{const select=$(selector);select.innerHTML=Object.entries(obj).map(([key,value])=>`<option value="${esc(key)}">${esc(value.label)}</option>`).join('');};
-  fill('#calc-crop',CROPS);fill('#calc-system',SYSTEMS);fill('#calc-source',SOURCES);$('#calc-crop').value='tomatoes';$('#calc-system').value='drip';$('#calc-source').value='borehole';
-  function drawChart(values){const svg=$('#cash-chart'),W=640,H=260,pad={l:70,r:15,t:15,b:25},min=Math.min(0,...values),max=Math.max(0,...values),span=max-min||1,x=i=>pad.l+i/(values.length-1)*(W-pad.l-pad.r),y=v=>pad.t+(max-v)/span*(H-pad.t-pad.b);let markup='';for(let i=0;i<5;i++){const value=min+span*i/4,yy=y(value);markup+=`<line class="chart-grid" x1="${pad.l}" x2="${W-pad.r}" y1="${yy}" y2="${yy}"/><text class="chart-label" x="${pad.l-7}" y="${yy+4}" text-anchor="end">${esc(kes(value))}</text>`;}const pts=values.map((v,i)=>`${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');markup+=`<line class="chart-zero" x1="${pad.l}" x2="${W-pad.r}" y1="${y(0)}" y2="${y(0)}"/><polyline class="chart-line" points="${pts}"/>`;for(let i=0;i<values.length;i+=Math.max(1,Math.ceil(values.length/8)))markup+=`<text class="chart-label" x="${x(i)}" y="${H-5}" text-anchor="middle">Yr ${i}</text>`;svg.innerHTML=markup;}
-  function updateCalc(){const area=Number($('#calc-area').value),years=Number($('#calc-years').value),rate=Number($('#calc-rate').value),priceAdj=Number($('#calc-price').value);$('#years-out').textContent=`${years} years`;$('#rate-out').textContent=`${rate}%`;$('#price-out').textContent=`${priceAdj>0?'+':''}${priceAdj}%`;if(!Number.isFinite(area)||area<=0){$('#calc-summary').textContent='Enter a land area greater than zero.';return;}try{const result=computeInvestment({area,unit:$('#calc-unit').value,crop:$('#calc-crop').value,system:$('#calc-system').value,source:$('#calc-source').value,seasons:Number($('#calc-seasons').value),years,rate,priceAdj});const crop=CROPS[$('#calc-crop').value],system=SYSTEMS[$('#calc-system').value],source=SOURCES[$('#calc-source').value],last=result.cumulative.at(-1);$('#calc-summary').textContent=`${result.ha.toFixed(1)} ha · ${crop.label} · ${system.label}`;$('#result-capex').textContent=kes(result.capex);$('#result-net').textContent=kes(result.steadyNet);$('#result-payback').textContent=result.payback===null?`> ${years} years`:`${result.payback.toFixed(1)} years`;$('#result-npv').textContent=kes(result.npv);$('#result-irr').textContent=result.irr===null?'Not available':`${(result.irr*100).toFixed(1)}%`;$('#result-total').textContent=kes(last);$('#calc-verdict').textContent=result.npv>0&&result.payback!==null?`Under these assumptions, estimated payback is ${result.payback.toFixed(1)} years; NPV is ${kes(result.npv)}.`:`Under these assumptions, costs are not recovered within ${years} years at the selected discount rate.`;drawChart(result.cumulative);$('#assumptions-list').innerHTML=`<li>Crop price: ${kes(crop.price*(1+priceAdj/100))} per tonne</li><li>Yield: ${crop.yield} tonnes/ha/season; system production adjustment: ${Math.round(system.boost*100)}%</li><li>Production cost: ${kes(crop.cost)}/ha/season</li><li>System and water source capital: ${kes(system.capex)} + ${kes(source.capex)} per hectare</li><li>Annual operation and maintenance: ${OM_RATE*100}% of initial capital cost</li><li>Production ramp-up: ${Math.round(RAMP[0]*100)}% in year one and ${Math.round(RAMP[1]*100)}% in year two; full thereafter</li>`;}catch(error){$('#calc-summary').textContent=error.message;}}
-  $('#calc-form').addEventListener('input',updateCalc);updateCalc();
-  const report=$('#report-form'),reason=report.elements.reason;reason.addEventListener('input',()=>$('#reason-count').textContent=reason.value.length);report.addEventListener('submit',event=>{event.preventDefault();if(!report.reportValidity())return;$('#report-form-wrap').hidden=true;$('#report-confirmation').hidden=false;$('#report-confirmation').focus();});$('#new-report').addEventListener('click',()=>{report.reset();$('#reason-count').textContent='0';$('#report-confirmation').hidden=true;$('#report-form-wrap').hidden=false;report.elements.name.focus();});
+
+  const navList = $('nav[aria-label="Primary"] ul');
+  if (navList && !$('a[href="integrated-design.html"]', navList)) {
+    const item = document.createElement('li');
+    item.innerHTML = '<a href="integrated-design.html">System design</a>';
+    navList.append(item);
+  }
+
+  const brandName = $('.brand-text strong');
+  if (brandName) brandName.textContent = 'NISIP-MIS';
+
 })();
