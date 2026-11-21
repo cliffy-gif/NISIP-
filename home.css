@@ -230,12 +230,15 @@ address { font-style: normal; }
 }
 
 @media (max-width: 280px) {
-  .brand-text { display: none; }
+  .header-inner { gap: .25rem; }
+  .brand { gap: .25rem; }
+  .brand img, .footer-brand img { height: 30px; }
+  .brand-text { margin-left: 0; }
+  .brand-text strong { font-size: .7rem; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
-.brand-text strong { font-size: 1.15rem; }
 .footer-brand::after { content: "NISIP-MIS"; color: var(--green-900); font-weight: 700; letter-spacing: .04em; }
 .demo-notice { margin-bottom: 1.25rem; }
 .alert { padding: .85rem 1rem; border: 1px solid #bfe3f0; border-radius: 10px; background: #e8f6fb; color: #0a5c85; font-size: .9rem; }
