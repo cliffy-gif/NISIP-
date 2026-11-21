@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Sign In | NISIP</title>
+  <meta name="description" content="Staff sign-in for the State Department for Irrigation.">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="signin.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="NISIP home">
+        <span class="brand-text">
+          <strong>NISIP</strong>
+          <small>National Irrigation Sector Investment Plan</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="scheme.html">Scheme</a></li>
+          <li><a href="projects.html">Irrigation Projects</a></li>
+          <li><a href="map-analysis.html">Map Analysis</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment Calculator</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html" aria-current="page">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero hero--sm">
+    <div class="container">
+      <p class="eyebrow">Staff portal</p>
+      <h1>Staff sign in</h1>
+      <p class="lead">For State Department for Irrigation officers to manage scheme, project and report data.</p>
+    </div>
+  </section>
+
+  <main id="main" class="container page">
+    <div class="auth-wrap">
+      <section class="panel auth-card" aria-labelledby="auth-title">
+        <div id="signin-view">
+        <h2 id="auth-title">Welcome back</h2>
+        <p class="auth-sub">Sign in with your official work email.</p>
+
+        <div id="demo-banner" class="alert alert--info"><strong>Authentication is not connected.</strong> This demonstration does not create staff accounts or sessions. Do not enter a real password.</div>
+        <div id="auth-msg" class="alert" role="alert" hidden></div>
+
+        <form id="login" class="auth-form">
+          <div class="field">
+            <label for="email">Work email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="username" inputmode="email"
+                   autocapitalize="none" spellcheck="false" placeholder="your.name@department.go.ke" required>
+          </div>
+
+          <div class="field">
+            <label for="password">Password <span class="req" aria-hidden="true">*</span></label>
+            <div class="pw">
+              <input id="password" name="password" type="password" autocomplete="current-password"
+                     autocapitalize="none" spellcheck="false" minlength="8" required aria-describedby="caps">
+              <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password" aria-pressed="false">
+                <svg class="eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M3 3l18 18M10.6 5.1A10.7 10.7 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.4 4.5-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+              </button>
+            </div>
+            <small id="caps" class="caps" role="status" aria-live="polite" hidden>Caps Lock is on.</small>
+          </div>
+
+          <label class="check-row" for="remember">
+            <input id="remember" name="remember" type="checkbox">
+            <span>Keep me signed in on this device<br><small>Don’t tick this on a shared or public computer.</small></span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submit">Sign in</button>
+        </form>
+
+        <p class="auth-help">Forgot your password or need an account? Contact your department ICT administrator.</p>
+        </div>
+
+        <div id="confirmation" class="confirmation" hidden>
+          <div class="tick" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>
+          </div>
+          <h2 id="confirm-title" tabindex="-1">You’re signed in</h2>
+          <p>Welcome, <strong id="confirm-name"></strong>.</p>
+          <p class="demo-note" id="demo-note" hidden>Demo mode: no account was checked and no real session was created.</p>
+          <div class="redirect">
+            <p>Taking you to the homepage in <strong id="count">3</strong> seconds…</p>
+            <div class="redirect-bar" aria-hidden="true"><i></i></div>
+          </div>
+          <a class="btn btn-primary" href="index.html" id="go-home">Go to homepage now</a>
+        </div>
+      </section>
+
+      <p class="auth-legal">Authorised State Department for Irrigation staff only. Access is logged and unauthorised use may be prosecuted.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+        </div>
+        <p class="tagline">Revolutionizing irrigation.</p>
+      </div>
+
+      <nav aria-label="Useful links">
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="reports.html">Production reports</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+        </ul>
+      </nav>
+
+      <address>
+        <h2>Contact Us</h2>
+        <p>State Department for Irrigation</p>
+        <p>Maji House, Upper Hill, Off Ngong Road, Nairobi</p>
+        <p>P.O. Box 49720 – 00100, Nairobi</p>
+      </address>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* ---- Configuration ----
+     * AUTH_ENDPOINT: URL of your staff login API (e.g. '/api/auth/login'). null = not connected.
+     *   Contract: POST JSON { email, password, remember } with same-origin cookies.
+     *   200 = signed in (optional JSON { name }), 401 = wrong credentials, 429 = too many attempts.
+     * No sign-in is simulated when AUTH_ENDPOINT is unset. Connect an approved
+     * authentication service before enabling any staff-only capabilities. */
+    const AUTH_ENDPOINT = null;
+    const HOME_URL = 'index.html';
+    const REDIRECT_SECONDS = 3;
+
+    const form = $('#login'), msg = $('#auth-msg'), btn = $('#submit');
+    const email = $('#email'), pw = $('#password'), caps = $('#caps'), toggle = $('#pw-toggle');
+
+    function showMsg(text, kind) {
+      msg.textContent = text;
+      msg.classList.toggle('alert--info', kind === 'info');
+      msg.hidden = false;
+    }
+    function setBusy(on) {
+      btn.disabled = on;
+      btn.textContent = on ? 'Signing in…' : 'Sign in';
+      form.setAttribute('aria-busy', String(on));
+    }
+
+    async function authenticate(payload) {
+      if (AUTH_ENDPOINT) {
+        const res = await fetch(AUTH_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) { const d = await res.json().catch(() => ({})); return { ok: true, name: d.name }; }
+        if (res.status === 401) return { ok: false, error: 'Incorrect email or password.' };
+        if (res.status === 429) return { ok: false, error: 'Too many attempts. Please wait a few minutes and try again.' };
+        return { ok: false, error: 'Something went wrong on our side. Please try again later.' };
+      }
+      return { ok: false, info: true, error: 'Staff sign-in is unavailable in this demonstration.' };
+    }
+
+    function showConfirmation(name) {
+      $('#signin-view').hidden = true;
+      $('#confirm-name').textContent = name;
+      $('#demo-note').hidden = true;
+      const box = $('#confirmation');
+      box.style.setProperty('--delay', REDIRECT_SECONDS + 's');
+      box.hidden = false;
+      $('#confirm-title').focus();
+
+      let left = REDIRECT_SECONDS;
+      $('#count').textContent = left;
+      const timer = setInterval(() => {
+        left -= 1;
+        if (left <= 0) { clearInterval(timer); location.replace(HOME_URL); }
+        else $('#count').textContent = left;
+      }, 1000);
+      $('#go-home').addEventListener('click', () => clearInterval(timer));
+    }
+
+    toggle.addEventListener('click', () => {
+      const show = pw.type === 'password';
+      pw.type = show ? 'text' : 'password';
+      toggle.setAttribute('aria-pressed', String(show));
+      toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      $('.eye', toggle).hidden = show;
+      $('.eye-off', toggle).hidden = !show;
+      pw.focus();
+    });
+
+    const capsCheck = e => { caps.hidden = !(e.getModifierState && e.getModifierState('CapsLock')); };
+    pw.addEventListener('keydown', capsCheck);
+    pw.addEventListener('keyup', capsCheck);
+    pw.addEventListener('blur', () => { caps.hidden = true; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.hidden = true;
+      setBusy(true);
+      let result;
+      try {
+        result = await authenticate({ email: email.value.trim(), password: pw.value, remember: $('#remember').checked });
+      } catch (err) {
+        result = { ok: false, error: 'Could not reach the server. Check your connection and try again.' };
+      }
+      setBusy(false);
+
+      if (result.ok) { pw.value = ''; showConfirmation(result.name || email.value.trim()); return; }
+      pw.value = '';
+      showMsg(result.error, result.info ? 'info' : undefined);
+      pw.focus();
+    });
+  </script>
+</body>
+</html>

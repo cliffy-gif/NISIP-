@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Integrated system design | NISIP-MIS</title>
+  <meta name="description" content="Integrated systems design for the National Irrigation Sector Investment Plan Management Information System.">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="NISIP-MIS home">
+        <span class="brand-text"><strong>NISIP-MIS</strong><small>National Irrigation Sector Investment Plan</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav id="nav-links" class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="scheme.html">Schemes</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="map-analysis.html">Map analysis</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="investment-calculator.html">Investment calculator</a></li>
+          <li><a href="integrated-design.html" aria-current="page">System design</a></li>
+        </ul>
+        <a class="btn btn-light" href="signin.html">Staff sign in</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero hero--sm design-hero">
+    <div class="container">
+      <p class="eyebrow">Integrated systems design</p>
+      <h1>From field information to trusted decisions</h1>
+      <p class="lead design-intro">NISIP-MIS is intended to give the irrigation sector a shared, governed view of schemes, projects and performance—so planning, monitoring and investment decisions can use consistent information.</p>
+    </div>
+  </section>
+
+  <main id="main" class="container page">
+    <div class="alert design-callout" role="note">
+      <strong>Prototype boundary:</strong> this site is a static demonstration. Its sample records are illustrative; sign-in, persistence, official report delivery, notifications and external agency APIs are not connected.
+    </div>
+
+    <section class="panel diagram-panel" aria-labelledby="diagram-title">
+      <div class="panel-head">
+        <div>
+          <h2 id="diagram-title">Integrated system view</h2>
+          <p>People initiate work; application services validate and route it; governed information becomes reports for authorized users.</p>
+        </div>
+      </div>
+      <div class="diagram-scroll" role="region" aria-label="Scrollable integrated system diagram" tabindex="0">
+        <svg class="integration-diagram" viewBox="0 0 1200 760" role="img" aria-labelledby="svg-title svg-desc" xmlns="http://www.w3.org/2000/svg">
+          <title id="svg-title">NISIP-MIS integrated systems design</title>
+          <desc id="svg-desc">Public users and field officers use web interfaces. Application services validate entries and enforce access rules before updating scheme, project, water-resource and performance records. Reporting and analytics provide approved information to leadership and external stakeholders. Security, audit, backup and monitoring apply across the system.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#537268"/></marker>
+            <marker id="arrow-blue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#2875a8"/></marker>
+            <marker id="arrow-orange" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#be6819"/></marker>
+          </defs>
+          <rect x="258" y="46" width="684" height="570" rx="22" fill="#f3f8f6" stroke="#11694f" stroke-width="3" stroke-dasharray="10 8"/>
+          <text x="284" y="80" class="node-title" fill="#0b3d2e">NISIP-MIS application boundary</text>
+
+          <rect x="20" y="124" width="202" height="102" rx="14" fill="#e8f6fb" stroke="#0e7e9b" stroke-width="2"/>
+          <text x="121" y="158" text-anchor="middle" class="node-title">Public users</text>
+          <text x="121" y="182" text-anchor="middle" class="node-copy">Citizens · investors · partners</text>
+          <text x="121" y="202" text-anchor="middle" class="node-copy">Browse · map · request · calculate</text>
+
+          <rect x="20" y="303" width="202" height="102" rx="14" fill="#e8f6fb" stroke="#0e7e9b" stroke-width="2"/>
+          <text x="121" y="337" text-anchor="middle" class="node-title">Field / project officers</text>
+          <text x="121" y="361" text-anchor="middle" class="node-copy">Submit scheme &amp; progress updates</text>
+          <text x="121" y="381" text-anchor="middle" class="node-copy">Source records; not IoT telemetry</text>
+
+          <rect x="20" y="482" width="202" height="102" rx="14" fill="#fff3e5" stroke="#be6819" stroke-width="2"/>
+          <text x="121" y="516" text-anchor="middle" class="node-title">Reviewers &amp; leadership</text>
+          <text x="121" y="540" text-anchor="middle" class="node-copy">Review requests and submissions</text>
+          <text x="121" y="560" text-anchor="middle" class="node-copy">Use reports for planning decisions</text>
+
+          <rect x="292" y="116" width="278" height="116" rx="14" fill="#fff" stroke="#2875a8" stroke-width="2"/>
+          <text x="431" y="151" text-anchor="middle" class="node-title">Public information services</text>
+          <text x="431" y="177" text-anchor="middle" class="node-copy">Scheme catalogue · projects · map</text>
+          <text x="431" y="198" text-anchor="middle" class="node-copy">Investment scenarios · report request</text>
+
+          <rect x="630" y="116" width="278" height="116" rx="14" fill="#fff" stroke="#2875a8" stroke-width="2"/>
+          <text x="769" y="151" text-anchor="middle" class="node-title">Staff workspace</text>
+          <text x="769" y="177" text-anchor="middle" class="node-copy">Authenticated role-based access</text>
+          <text x="769" y="198" text-anchor="middle" class="node-copy">Review · update · approve · audit</text>
+
+          <rect x="411" y="292" width="378" height="124" rx="16" fill="#dcefe7" stroke="#11694f" stroke-width="2"/>
+          <text x="600" y="329" text-anchor="middle" class="node-title">Application &amp; workflow services</text>
+          <text x="600" y="355" text-anchor="middle" class="node-copy">Validate fields · apply access rules · timestamp</text>
+          <text x="600" y="376" text-anchor="middle" class="node-copy">Record events · route report requests · create references</text>
+          <text x="600" y="397" text-anchor="middle" class="node-copy">Proposed REST/HTTPS API boundary</text>
+
+          <rect x="292" y="472" width="278" height="104" rx="14" fill="#fff" stroke="#737f85" stroke-width="2"/>
+          <text x="431" y="505" text-anchor="middle" class="node-title">Authoritative information stores</text>
+          <text x="431" y="531" text-anchor="middle" class="node-copy">Schemes · projects · water resources</text>
+          <text x="431" y="552" text-anchor="middle" class="node-copy">Progress / M&amp;E · users · request records</text>
+
+          <rect x="630" y="472" width="278" height="104" rx="14" fill="#fff" stroke="#be6819" stroke-width="2"/>
+          <text x="769" y="505" text-anchor="middle" class="node-title">Reports &amp; decision support</text>
+          <text x="769" y="531" text-anchor="middle" class="node-copy">Dashboards · approved extracts · trends</text>
+          <text x="769" y="552" text-anchor="middle" class="node-copy">No automatic financial transactions</text>
+
+          <rect x="978" y="124" width="202" height="130" rx="14" fill="#fff3e5" stroke="#be6819" stroke-width="2"/>
+          <text x="1079" y="158" text-anchor="middle" class="node-title">External stakeholders</text>
+          <text x="1079" y="182" text-anchor="middle" class="node-copy">Ministry · counties</text>
+          <text x="1079" y="202" text-anchor="middle" class="node-copy">Treasury · Auditor-General</text>
+          <text x="1079" y="229" text-anchor="middle" class="node-copy">Approved reports / coordination</text>
+
+          <rect x="978" y="316" width="202" height="112" rx="14" fill="#f0eef9" stroke="#6551a5" stroke-width="2"/>
+          <text x="1079" y="351" text-anchor="middle" class="node-title">Hosting &amp; network</text>
+          <text x="1079" y="377" text-anchor="middle" class="node-copy">Render: selected ongoing site host</text>
+          <text x="1079" y="398" text-anchor="middle" class="node-copy">Static pages · sample data only</text>
+          <text x="1079" y="417" text-anchor="middle" class="node-copy">Konza if institution requires it</text>
+
+          <rect x="978" y="490" width="202" height="100" rx="14" fill="#f0eef9" stroke="#6551a5" stroke-width="2"/>
+          <text x="1079" y="524" text-anchor="middle" class="node-title">External services</text>
+          <text x="1079" y="550" text-anchor="middle" class="node-copy">Email / eCitizen / agency APIs</text>
+          <text x="1079" y="571" text-anchor="middle" class="node-copy">Proposed only; not connected</text>
+
+          <path d="M222 175 H292" fill="none" stroke="#2875a8" stroke-width="3" marker-end="url(#arrow-blue)"/>
+          <text x="257" y="162" text-anchor="middle" class="flow-label">HTTPS</text>
+          <path d="M222 354 H630" fill="none" stroke="#2875a8" stroke-width="3" marker-end="url(#arrow-blue)"/>
+          <text x="420" y="342" text-anchor="middle" class="flow-label">Signed-in staff updates</text>
+          <path d="M431 232 V292" fill="none" stroke="#537268" stroke-width="3" marker-end="url(#arrow)"/>
+          <path d="M769 232 V292" fill="none" stroke="#537268" stroke-width="3" marker-end="url(#arrow)"/>
+          <text x="612" y="266" text-anchor="middle" class="flow-label">Commands · events</text>
+          <path d="M506 416 V472" fill="none" stroke="#537268" stroke-width="3" marker-end="url(#arrow)"/>
+          <text x="468" y="450" text-anchor="middle" class="flow-label">Validated records</text>
+          <path d="M694 472 V416" fill="none" stroke="#be6819" stroke-width="3" marker-end="url(#arrow-orange)"/>
+          <text x="736" y="450" text-anchor="middle" class="flow-label">Queries / measures</text>
+          <path d="M908 525 H978 V189" fill="none" stroke="#be6819" stroke-width="3" marker-end="url(#arrow-orange)"/>
+          <text x="950" y="304" text-anchor="middle" class="flow-label" transform="rotate(-90 950 304)">Approved outputs</text>
+          <path d="M222 533 H292" fill="none" stroke="#be6819" stroke-width="3" marker-end="url(#arrow-orange)"/>
+          <text x="257" y="520" text-anchor="middle" class="flow-label">Review</text>
+          <path d="M978 372 H942" fill="none" stroke="#6551a5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+          <path d="M978 540 H942" fill="none" stroke="#6551a5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+
+          <rect x="20" y="656" width="1160" height="70" rx="14" fill="#0b3d2e"/>
+          <text x="48" y="685" class="layer-title">Cross-cutting controls</text>
+          <text x="280" y="685" class="control-copy">RBAC · least privilege · TLS · data minimization · audit trail · validation · backup / recovery · availability monitoring</text>
+          <text x="48" y="708" class="control-note">Production targets, retention rules, integrations and security controls require institutional approval and operational verification.</text>
+        </svg>
+      </div>
+      <p class="diagram-caption">Figure 1. Conceptual integration view synthesized from the supplied context, data-flow and layered architecture diagrams. Solid flows describe intended in-system exchanges; dashed flows are future integrations.</p>
+    </section>
+
+    <section class="design-section" aria-labelledby="purpose-title">
+      <h2 id="purpose-title">Goal and integrated outcome</h2>
+      <p>The original goal is to make irrigation-sector information easier to collect, govern and use: maintain a consistent picture of schemes, projects, water resources and performance; improve oversight and accountability; and provide public access to approved information. The integrated system turns officer-submitted records into validated, traceable information, then into maps, reports and dashboards that support planning and monitoring.</p>
+    </section>
+
+    <section class="design-section" aria-labelledby="components-title">
+      <h2 id="components-title">How the components work together</h2>
+      <div class="design-grid">
+        <article class="design-card"><h3>People and services</h3><p>Public users, investors and partners browse approved records or request a report. Field and project officers submit updates. Designated reviewers validate changes and process requests; leadership uses governed reports. The source documents use both NIA and State Department labels, so the system owner and approval roles must be confirmed by the institution.</p></article>
+        <article class="design-card"><h3>Applications and processes</h3><p>Public catalogue, project tracking, map, calculator and report-request modules share one application service boundary. A staff workspace applies role checks and routes data-entry and report-review workflows. The calculator is a scenario aid, not a transaction or investment offer.</p></article>
+        <article class="design-card"><h3>Events and data</h3><p>Submission, validation, approval, role changes and report-request status changes are events to be timestamped and audited. Records cover schemes, projects, water resources, progress/M&amp;E, users and report requests. Geotags apply only where relevant and collected lawfully. No sensor/IoT ingestion is in scope.</p></article>
+        <article class="design-card"><h3>Interfaces and messaging</h3><p>Browsers use HTTPS. The design anticipates a same-origin API for validated reads and writes, with structured responses and a traceable request reference. Email delivery, eCitizen, Treasury and county interfaces are proposals only; no external API or messaging provider is connected in this prototype.</p></article>
+        <article class="design-card"><h3>Technology and hosting</h3><p>Render is the selected ongoing host for this static HTML/CSS/JavaScript site; the map depends on external Leaflet and map-tile services. The original BRS names government infrastructure for production, so Render is a deliberate change that needs institutional approval if that requirement applies. This app has no real authentication or database and is not suitable for sensitive records.</p></article>
+        <article class="design-card"><h3>Security and operations</h3><p>Target design controls include role-based access, least privilege, encrypted transport, data minimization, audit logging, backups, recovery tests, uptime and error monitoring. The prototype has no authentication, database, audit log, backup process or operations telemetry, and makes no compliance or availability claim.</p></article>
+      </div>
+    </section>
+
+    <section class="design-section" aria-labelledby="workflow-title">
+      <h2 id="workflow-title">Core end-to-end flows</h2>
+      <div class="design-grid">
+        <article class="design-card"><h3>1 · Field update to oversight</h3><p>Officer signs in → selects an assigned scheme/project → submits a validated, timestamped update with source and location where applicable → reviewer checks it → approved record updates the shared register → dashboards and reports expose the permitted view.</p></article>
+        <article class="design-card"><h3>2 · Report request to delivery</h3><p>Requester submits a purpose and contact details → system acknowledges with a unique reference → authorized staff review and approve/decline → approved document is released through an access-controlled channel → requester is notified. Only the form preview exists here; no request is sent or retained.</p></article>
+      </div>
+    </section>
+
+    <section class="design-section" aria-labelledby="limits-title">
+      <h2 id="limits-title">Integration boundaries and decisions</h2>
+      <p>Financial processing, automated sensor data, IFMIS, HR, eCitizen authentication, government agency APIs and automated email are not implemented. They require agreed owners, data-sharing rules, interface specifications and security review. The 5,000-user, response-time and 99.5%-availability figures in the BRS are proposed targets—not tested commitments. Production use requires approved hosting, authoritative data, identity management, a persistent database, retention/backups and operational monitoring.</p>
+      <div class="design-grid">
+        <article class="design-card"><h3>Corrected companion documents</h3><ul><li><a href="docs/PROCESS-DESIGN.md">Process design</a></li><li><a href="docs/SYSTEM-ARCHITECTURE.md">System architecture</a></li><li><a href="docs/BUSINESS-REQUIREMENTS.md">Business requirements</a></li><li><a href="docs/INTEGRATION-DESIGN.md">Integration design and diagram notes</a></li></ul></article>
+        <article class="design-card"><h3>Deployment boundary</h3><p>Render is the selected host for the current static project. The Konza container package is an alternative only if your institution requires government hosting. <a class="design-link" href="docs/KONZA-DEPLOYMENT.md">Konza deployment guide →</a></p></article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="footer-brand"><strong>NISIP-MIS</strong></div><p class="tagline">Integrated irrigation information for planning and accountability.</p></div>
+      <nav aria-label="Useful links"><h2>Explore</h2><ul><li><a href="projects.html">Projects</a></li><li><a href="reports.html">Report requests</a></li><li><a href="index.html">Home</a></li></ul></nav>
+      <div><h2>Prototype status</h2><p>Static demonstration; no accounts, official data or live integrations are configured.</p></div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
