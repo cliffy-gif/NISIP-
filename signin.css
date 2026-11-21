@@ -34,7 +34,7 @@ h1, h2, h3, p { margin: 0; }
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, .92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
 .header-inner { display: flex; align-items: center; gap: 2.5rem; min-height: 76px; }
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: none; }
-.brand img, .footer-brand img { height: 44px; width: auto; max-width: none; flex: none; object-fit: contain; }
+.brand img, .footer-brand img { height: 48px; width: auto; max-width: none; flex: none; object-fit: contain; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; margin-left: .35rem; }
 .brand-text strong { font-size: 1.1rem; color: var(--green-900); letter-spacing: .04em; }
 .brand-text small { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
@@ -130,7 +130,10 @@ input:user-invalid { border-color: var(--danger); }
 address { font-style: normal; }
 
 /* Responsive */
-@media (max-width: 1240px) { .brand-text { display: none; } }
+@media (max-width: 1240px) {
+  .brand-text strong { font-size: 1rem; }
+  .brand-text small { display: none; }
+}
 @media (max-width: 1024px) {
   .menu-toggle { display: inline-flex; margin-left: auto; }
   .header-inner { gap: 1rem; }
@@ -143,12 +146,11 @@ address { font-style: normal; }
   .auth-card { padding: 1.5rem 1.25rem; }
   .hero { min-height: 240px; padding: 2.5rem 0 6rem; }
 }
+@media (max-width: 280px) { .brand-text { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
   .confirmation { animation: none; }
   .redirect-bar { display: none; }
 }
 
-.brand img, .footer-brand img { display: none; }
-.brand-text { display: flex; }
 .footer-brand::after { content: "NISIP-MIS"; color: var(--green-900); font-weight: 700; letter-spacing: .04em; }

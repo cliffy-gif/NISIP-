@@ -48,7 +48,7 @@ h1, h2, p { margin: 0; }
 }
 .header-inner { display: flex; align-items: center; gap: 2.5rem; min-height: 76px; }
 .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; flex: none; }
-.brand img, .footer-brand img { height: 44px; width: auto; max-width: none; flex: none; object-fit: contain; }
+.brand img, .footer-brand img { height: 48px; width: auto; max-width: none; flex: none; object-fit: contain; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; margin-left: .35rem; }
 .brand-text strong { font-size: 1.1rem; color: var(--green-900); letter-spacing: .04em; }
 .brand-text small { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
@@ -204,7 +204,8 @@ address { font-style: normal; }
 }
 
 @media (max-width: 1240px) {
-  .brand-text { display: none; }
+  .brand-text strong { font-size: 1rem; }
+  .brand-text small { display: none; }
 }
 
 @media (max-width: 1024px) {
@@ -228,10 +229,12 @@ address { font-style: normal; }
   .hero { min-height: 340px; padding: 2.5rem 0 7rem; }
 }
 
+@media (max-width: 280px) {
+  .brand-text { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
-.brand img, .footer-brand img { display: none; }
-.brand-text { display: flex; }
 .brand-text strong { font-size: 1.15rem; }
 .footer-brand::after { content: "NISIP-MIS"; color: var(--green-900); font-weight: 700; letter-spacing: .04em; }
 .demo-notice { margin-bottom: 1.25rem; }
